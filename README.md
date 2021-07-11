@@ -5,3 +5,4 @@
 * Add Discord Display
 * Add Discord Search
 * Add Contact Addition Menu
+* Bug when users have multiple social medias
