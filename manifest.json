@@ -1,9 +1,10 @@
 {
-  "name": "Social Google Contacts",
-  "description": "Social Media and game profiles tracked in Google Contacts.",
-  "version": "1.0",
-  "manifest_version": 3,
-  "background": {
-    "service_worker": "background.js"
-  }
+"name": "Social Google Contacts",
+"description": "Social Media and game profiles tracked in Google Contacts.",
+"version": "1.0",
+"manifest_version": 3,
+"content_scripts": [{
+    "js": ["content.js"],
+    "matches": ["https://contacts.google.com/*"]
+	}]
 }
