@@ -21,6 +21,8 @@ function addSearchButtons() {
 	minecraftJavaEditionSearchButton = document.createElement("button");
 	minecraftJavaEditionSearchButton.textContent = "Search Minecraft Java Edition";
 	minecraftJavaEditionSearchButton.onclick = searchMinecraftJavaEdition;
+	document.getElementsByClassName("gb_Te")[0].style.display = "inline-block";
+	document.getElementsByClassName("gb_Te")[0].style.width = "70%";
 	document.getElementsByClassName("gb_Fe")[0].appendChild(minecraftJavaEditionSearchButton);
 }
 
