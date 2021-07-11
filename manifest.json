@@ -4,9 +4,9 @@
 "version": "0.1",
 "manifest_version": 3,
 "permissions": [
-	"alarms"
+	"tabs"
 ],
-"page_action": {
+"action": {
 	"default_popup": "popup.html"
 },
 "content_scripts": [{

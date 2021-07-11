@@ -16,5 +16,26 @@ function updateContactFieldsInViewMode() {
 		}
 	}
 }
-document.onload = setTimeout(updateContactFieldsInViewMode,1000);
-//document.onload = updateContactFieldsInViewMode();
+
+function addSearchButtons() {
+	minecraftJavaEditionSearchButton = document.createElement("button");
+	minecraftJavaEditionSearchButton.textContent = "Search Minecraft Java Edition";
+	minecraftJavaEditionSearchButton.onclick = searchMinecraftJavaEdition;
+	document.getElementsByClassName("gb_Fe")[0].appendChild(minecraftJavaEditionSearchButton);
+}
+
+function searchMinecraftJavaEdition() {
+	userToSearch = document.getElementsByClassName("Ax4B8 ZAGvjd")[0].value;
+	try {
+		fetch("https://api.ashcon.app/mojang/v2/user/"+userToSearch).then(response => response.json()).then(data => {
+			userUUID = data["uuid"];
+			searchURL="https://contacts.google.com/search/"+userUUID;
+			window.location=searchURL;
+		});
+	} catch {
+		alert("Minecraft Java Edition username \""+userToSearch+"\" does not exist!");
+	}
+}
+
+setInterval(updateContactFieldsInViewMode,500);
+document.onload = setTimeout(addSearchButtons,1000);
