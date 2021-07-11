@@ -29,9 +29,15 @@ function addSearchButtons() {
 	minecraftJavaEditionSearchButton = document.createElement("button");
 	minecraftJavaEditionSearchButton.textContent = "Search Minecraft Java Edition";
 	minecraftJavaEditionSearchButton.onclick = searchMinecraftJavaEdition;
+	document.getElementsByClassName("gb_Fe")[0].appendChild(minecraftJavaEditionSearchButton);
+	
+	instagramSearchButton = document.createElement("button");
+	instagramSearchButton.textContent = "Search Instagram";
+	instagramSearchButton.onclick = searchInstagram;
+	document.getElementsByClassName("gb_Fe")[0].appendChild(instagramSearchButton);
+	
 	document.getElementsByClassName("gb_Te")[0].style.display = "inline-block";
 	document.getElementsByClassName("gb_Te")[0].style.width = "70%";
-	document.getElementsByClassName("gb_Fe")[0].appendChild(minecraftJavaEditionSearchButton);
 }
 
 function searchMinecraftJavaEdition() {
@@ -45,6 +51,20 @@ function searchMinecraftJavaEdition() {
 	} catch {
 		alert("Minecraft Java Edition username \""+userToSearch+"\" does not exist!");
 	}
+}
+
+function searchInstagram() {
+	userToSearch = document.getElementsByClassName("Ax4B8 ZAGvjd")[0].value;
+	var instagramUserID = null;
+	chrome.runtime.sendMessage({contentScriptQuery: "queryInstagramUserID", username: userToSearch}, response => {
+		instagramUserID = response;
+		if (instagramUserID != null) {
+			searchURL="https://contacts.google.com/search/"+instagramUserID;
+			window.location=searchURL;
+		} else {
+			alert("Instagram username \""+userToSearch+"\" does not exist!");
+		}
+	});
 }
 
 if (window.location.host == "contacts.google.com") {

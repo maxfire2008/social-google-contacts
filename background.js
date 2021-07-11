@@ -9,6 +9,21 @@ chrome.runtime.onMessage.addListener(
 				//.then(text => console.log(text))
 				.catch(error => console.log(error));
 			return true;  // Will respond asynchronously.
+		} else if (request.contentScriptQuery == "queryInstagramUserID") {
+			var url = 'https://www.instagram.com/'+request.username+'/?__a=1';
+			fetch(url)
+				.then(response => response.text())
+				.then(text => JSON.parse(text))
+				.then(jsonResponse => {
+					if (jsonResponse["graphql"]) {
+						sendResponse(jsonResponse["graphql"]["user"]["id"]);
+					} else {
+						sendResponse(null);
+					}
+				})
+				//.then(text => console.log(text))
+				.catch(error => console.log(error));
+			return true;  // Will respond asynchronously.
 		}
 	}
 );
