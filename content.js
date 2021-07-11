@@ -13,6 +13,14 @@ function updateContactFieldsInViewMode() {
 			fetch("https://api.ashcon.app/mojang/v2/user/"+mcuseruuid).then(response => response.json()).then(data => {
 					displayField.innerHTML = "<a href='https://namemc.com/search?q="+mcuseruuid+"'>"+data["username"]+"</a>";
 				});
+		} else if (typeField.textContent == "  • net.maxstuff.social-google-contacts.instagram") {
+			//chrome.runtime.sendMessage({contentScriptQuery: "queryInstagramUsername", userID: "9712378716"}, response => console.log(response));
+			instagramid = displayField.textContent;
+			displayField.textContent = "Pending";
+			typeField.textContent = "  • Instagram";
+			chrome.runtime.sendMessage({contentScriptQuery: "queryInstagramUsername", userID: instagramid}, response => {
+					displayField.innerHTML = "<a href='https://www.instagram.com/"+response+"'>"+response+"</a>";
+				});
 		}
 	}
 }
@@ -39,5 +47,7 @@ function searchMinecraftJavaEdition() {
 	}
 }
 
-setInterval(updateContactFieldsInViewMode,500);
-document.onload = setTimeout(addSearchButtons,1000);
+if (window.location.host == "contacts.google.com") {
+	setInterval(updateContactFieldsInViewMode,500);
+	document.onload = setTimeout(addSearchButtons,1000);
+}

@@ -4,13 +4,17 @@
 "version": "0.1",
 "manifest_version": 3,
 "permissions": [
-	"tabs"
+	"tabs",
+	"alarms"
 ],
 "action": {
 	"default_popup": "popup.html"
 },
+"background": {
+	"service_worker": "background.js"
+},
 "content_scripts": [{
     "js": ["content.js"],
-    "matches": ["https://contacts.google.com/*"]
+    "matches": ["https://contacts.google.com/*","https://www.instagram.com/graphql/query/"]
 	}]
 }
